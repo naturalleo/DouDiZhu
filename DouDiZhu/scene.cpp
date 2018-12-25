@@ -234,26 +234,42 @@ void Scene::DrawComputerCards(void)
 
 		i = game->player[1]->cards.size();
 		if (i){//先显示牌的背面
-			TransparentBlt(hdcScene, sceneSize.cx - 50 - cardSize.cx / 2, 65, cardSize.cx, cardSize.cy,
-				hdcCardBack, 0, 0, cardSize.cx, cardSize.cy, RGB(0, 0, 255));
+			//TransparentBlt(hdcScene, sceneSize.cx - 50 - cardSize.cx / 2, 65, cardSize.cx, cardSize.cy,
+			//	hdcCardBack, 0, 0, cardSize.cx, cardSize.cy, RGB(0, 0, 255));
 
-			//然后写上剩余牌数
-			wsprintf(szText, TEXT("%d"), i);
-			GetTextExtentPoint32(hdcScene, szText, wcslen(szText), &size);
-			TextOut(hdcScene, sceneSize.cx - 50 - size.cx / 2,
-				65 + (cardSize.cy - size.cy) / 2, szText, wcslen(szText));
+			////然后写上剩余牌数
+			//wsprintf(szText, TEXT("%d"), i);
+			//GetTextExtentPoint32(hdcScene, szText, wcslen(szText), &size);
+			//TextOut(hdcScene, sceneSize.cx - 50 - size.cx / 2,
+			//	65 + (cardSize.cy - size.cy) / 2, szText, wcslen(szText));
+
+			int j = 0;
+			for (auto rb = game->player[1]->cards.rbegin(); rb != game->player[1]->cards.rend(); ++rb) {
+				TransparentBlt(hdcScene, sceneSize.cx - 50 - cardSize.cx / 2, 65 + 16 * j,
+					cardSize.cx, cardSize.cy, hdcCards, cardSize.cx * *rb, 0,
+					cardSize.cx, cardSize.cy, RGB(0, 0, 255));
+				++j;
+			}
 
 		}
 
 		i = game->player[2]->cards.size();
 		if (i){//显示一张牌的背面
-			TransparentBlt(hdcScene, 50 - cardSize.cx / 2, 65, cardSize.cx, cardSize.cy,
-				hdcCardBack, 0, 0, cardSize.cx, cardSize.cy, RGB(0, 0, 255));
-			//写上剩余牌数
-			wsprintf(szText, TEXT("%d"), i);
-			GetTextExtentPoint32(hdcScene, szText, wcslen(szText), &size);
-			TextOut(hdcScene, 50 - size.cx / 2, 65 + (cardSize.cy - size.cy) / 2,
-				szText, wcslen(szText));
+			//TransparentBlt(hdcScene, 50 - cardSize.cx / 2, 65, cardSize.cx, cardSize.cy,
+			//	hdcCardBack, 0, 0, cardSize.cx, cardSize.cy, RGB(0, 0, 255));
+			////写上剩余牌数
+			//wsprintf(szText, TEXT("%d"), i);
+			//GetTextExtentPoint32(hdcScene, szText, wcslen(szText), &size);
+			//TextOut(hdcScene, 50 - size.cx / 2, 65 + (cardSize.cy - size.cy) / 2,
+			//	szText, wcslen(szText));
+
+			int j = 0;
+			for (auto rb = game->player[2]->cards.rbegin(); rb != game->player[2]->cards.rend(); ++rb) {
+				TransparentBlt(hdcScene, (100 - cardSize.cx) / 2, 65 + 16 * j,
+					cardSize.cx, cardSize.cy, hdcCards, cardSize.cx * *rb, 0,
+					cardSize.cx, cardSize.cy, RGB(0, 0, 255));
+				++j;
+			}
 
 		}
 

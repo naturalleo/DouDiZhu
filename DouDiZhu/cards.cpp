@@ -14,11 +14,15 @@
 \**************************************************************/
 
 #include <stdexcept>
+#include <iostream>
 #include <random>
 #include <time.h>
 #include "cards.h"
 
+
+
 using namespace std;
+
 
 Cards::Cards()
 {
@@ -39,9 +43,11 @@ void Cards::RandCards(void)
 		swap(cards[i], cards[rand]);
 	}
 	remain = 54;
-	
 	return;
 }
+
+
+
 //Ä¨ÅÆ
 int Cards::GetCard(void)
 {

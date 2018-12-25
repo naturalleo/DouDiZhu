@@ -16,6 +16,8 @@
 #include "winmain.h"
 #include "game.h"
 #include "scene.h"
+#include "resource.h"
+
 
 
 PTSTR szAppName = TEXT("斗地主");
@@ -44,7 +46,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR szCmd, int nShow)
 	wcls.hIconSm = NULL;
 	wcls.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcls.lpszClassName = szAppName;
-	wcls.lpszMenuName = NULL;
+	wcls.lpszMenuName = MAKEINTRESOURCE(IDR_MENU1);
 
 	if (!RegisterClassEx(&wcls)){
 		MessageBox(NULL, TEXT("注册类出错！"), TEXT("错误"), MB_ICONERROR);
@@ -92,6 +94,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	static Scene scene(&game);
 
 	switch (message){
+	case WM_COMMAND:
+		if (hwnd )
+		{
+			switch (LOWORD(wParam))
+			{
+			case ID_40001:
+				//MessageBoxA(hwnd, "确实要停止游戏服务并退出吗？", "警告", MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2);
+				game.GameStartFromXml();
+				return 0;
+			case ID_40002:
+				//game.LoadPlayerScore();
+				//scene.InitScene(hwnd);
+				game.GameStart();
+				//scene.DrawBackground();
+				return 0;
+			}
+		}
+		break;
 	case WM_CREATE:
 		size = scene.GetSize();
 		caption = GetSystemMetrics(SM_CYCAPTION);

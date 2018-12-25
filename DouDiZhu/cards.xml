@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Person ID="1">
+		<cards>1,2,3,4,5</cards>
+	</Person>
+	<Person ID="2">
+		<cards>18,19,20,21</cards>
+	</Person>
+	<Person ID="3">
+		<cards>35,36,37</cards>
+	</Person>
+	<Person ID="4">
+		<cards>52,53,0</cards>
+	</Person>
+	<Person ID="5">
+		<cards>1</cards>
+	</Person>
+	<Person ID="6">
+		<cards>1</cards>
+	</Person>
+</Config>

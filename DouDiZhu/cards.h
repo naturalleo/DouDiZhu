@@ -8,6 +8,8 @@ public:
 	int GetCard();//Ä¨ÅÆ
 	int GetRemain(void){ return remain; };
 
+
+
 private:
 	int cards[54];//ÅÆÊý×é
 	int remain;//Ê£ÓàÅÆÊý

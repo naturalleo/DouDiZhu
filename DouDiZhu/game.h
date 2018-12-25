@@ -1,6 +1,8 @@
 #pragma once
 
 #include <set>
+#include <vector>
+#include <string>
 #include "cards.h"
 
 //游戏进度状态
@@ -21,11 +23,13 @@ public:
 
 	Status GetStatus(void);//获取当前游戏进度状态
 	void GameStart(void);//开始新游戏
+	void GameStartFromXml(void);//开始新游戏
 	void InitGame(void);//初始化相关结构
 	void LoadPlayerScore();
 	void StorePlayerScore();
 	void RegisterScene(Scene *s){ this->scene = s; }
 	inline void SendCard(void);//发牌
+	inline void SendCardForXML(void);//发牌
 	void GetLandlord(void);//叫地主
 	void SendScore(int result);//设置玩家叫地主分数
 	void SendLandlordCard(void);//发地主牌
@@ -37,6 +41,9 @@ public:
 	void Hint(void);//提示
 	void Pass(void);//过牌
 	void GameOver(void);//游戏结束
+
+
+	void SplitString(const std::string& s, std::vector<std::string>& v, const std::string& c);
 
 private:
 	Status status;//游戏进度
