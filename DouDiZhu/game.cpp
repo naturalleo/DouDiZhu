@@ -270,6 +270,15 @@ void Game::SendCard(void)
 	}
 	for (int i = 0; i < 3; ++i)
 		landlordcard[i] = cardheap.GetCard();
+
+	for (int i = 0; i < 3; ++i)
+	{
+		for (std::set<int>::iterator itr = player[i]->cards.begin(); itr != player[i]->cards.end(); ++itr)
+		{
+			player[i]->remainCards.erase(*itr);
+		}
+	}
+
 }
 void Game::SendCardForXML(void)
 {
@@ -510,8 +519,8 @@ void Game::GameOver()
 
 	scene->ShowScene(hMainWnd);
 	if (IsPeopleWin)
-		MessageBox(hMainWnd, TEXT("恭喜，您获胜了！"), TEXT("游戏结束"), 0);
+		MessageBox(hMainWnd, TEXT("win！"), TEXT("游戏结束"), 0);
 	else
-		MessageBox(hMainWnd, TEXT("很遗憾，您输"), TEXT("游戏结束"), 0);
+		MessageBox(hMainWnd, TEXT("lost"), TEXT("游戏结束"), 0);
 	GameStart();
 }
