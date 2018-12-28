@@ -1,16 +1,16 @@
 /**************************************************************\
-Ä£¿é£º
-ÀàGame -> ¶·µØÖ÷.exe
-ÎÄ¼ş£º
+æ¨¡å—ï¼š
+ç±»Game -> æ–—åœ°ä¸».exe
+æ–‡ä»¶ï¼š
 game.cpp
-¹¦ÄÜ£º
-ÓÎÏ·Àà£¬¿ØÖÆÕû¸öÓÎÏ·µÄ½øĞĞ¡£°üº¬ÓÎÏ·½øĞĞ³ı½çÃæÒÔÍâµÄËùÓĞÔªËØ
-×÷Õß£º
-ËÎ±£Ã÷
-ĞŞ¸ÄÀúÊ·£º
-ĞŞ¸ÄÈË	ĞŞ¸ÄÊ±¼ä	ĞŞ¸ÄÄÚÈİ
+åŠŸèƒ½ï¼š
+æ¸¸æˆç±»ï¼Œæ§åˆ¶æ•´ä¸ªæ¸¸æˆçš„è¿›è¡Œã€‚åŒ…å«æ¸¸æˆè¿›è¡Œé™¤ç•Œé¢ä»¥å¤–çš„æ‰€æœ‰å…ƒç´ 
+ä½œè€…ï¼š
+å®‹ä¿æ˜
+ä¿®æ”¹å†å²ï¼š
+ä¿®æ”¹äºº	ä¿®æ”¹æ—¶é—´	ä¿®æ”¹å†…å®¹
 -------	-----------	-------------------------------
-ËÎ±£Ã÷	2014.12.5	´´½¨
+å®‹ä¿æ˜	2014.12.5	åˆ›å»º
 \**************************************************************/
 
 #include <Windows.h>
@@ -56,7 +56,7 @@ Game::~Game()
 	for (int i = 0; i < 3; ++i)
 		delete player[i];
 }
-//³õÊ¼»¯Ïà¹Ø½á¹¹
+//åˆå§‹åŒ–ç›¸å…³ç»“æ„
 void Game::InitGame()
 {
 	landlord = curplayer = lastone = nullptr;
@@ -68,7 +68,7 @@ void Game::InitGame()
 	cardheap.RandCards();
 	status = GETLANDLORD;
 }
-//¿ªÊ¼ĞÂÓÎÏ·
+//å¼€å§‹æ–°æ¸¸æˆ
 void Game::GameStart()
 {
 	InitGame();
@@ -134,7 +134,7 @@ void Game::GameStartFromXml(void)
 				string delstr(content);
 				int i = 0;
 				vector<string> v;
-				SplitString(delstr, v, ","); //¿É°´¶à¸ö×Ö·ûÀ´·Ö¸ô;
+				SplitString(delstr, v, ","); //å¯æŒ‰å¤šä¸ªå­—ç¬¦æ¥åˆ†éš”;
 
 				for (vector<string>::iterator itr = v.begin(); itr != v.end(); ++itr)
 				{
@@ -195,13 +195,13 @@ void Game::GameStartFromXml(void)
 			landlord->AddCard(mem);
 		scene->HideDiscardBtn();
 		scene->HideQuestionBtn();
-		scene->DrawBackground();//²úÉúÁËµØÖ÷£¬½«µØÖ÷ÅÆÕıÃæÏÔÊ¾
+		scene->DrawBackground();//äº§ç”Ÿäº†åœ°ä¸»ï¼Œå°†åœ°ä¸»ç‰Œæ­£é¢æ˜¾ç¤º
 		scene->ShowScene(hMainWnd);;
-		status = DISCARD;//µ±Ç°×´Ì¬Îª³öÅÆ½×¶Î
+		status = DISCARD;//å½“å‰çŠ¶æ€ä¸ºå‡ºç‰Œé˜¶æ®µ
 		SetTimer(hMainWnd, 1, 500, NULL);
 	}
 	else
-		assert(false, "ÅÆÊı²»¶ÔÇëÈ·ÈÏ£¡");
+		assert(false, "ç‰Œæ•°ä¸å¯¹è¯·ç¡®è®¤ï¼");
 
 }
 
@@ -225,12 +225,12 @@ void Game::StorePlayerScore()
 		out << player[i]->score << "\n";
 }
 
-//»ñÈ¡ÓÎÏ·µÄµ±Ç°½ø¶È
+//è·å–æ¸¸æˆçš„å½“å‰è¿›åº¦
 Status Game::GetStatus()
 {
 	return status;
 }
-//»ñÈ¡µ±Ç°Íæ¼ÒµÄÉÏ¼Ò
+//è·å–å½“å‰ç©å®¶çš„ä¸Šå®¶
 Player *Game::ProPlayer()
 {
 	int i;
@@ -240,12 +240,12 @@ Player *Game::ProPlayer()
 	}
 	return player[(i + 2) % 3];
 }
-//»ñÈ¡µ±Ç°Íæ¼ÒµÄÏÂ¼Ò
+//è·å–å½“å‰ç©å®¶çš„ä¸‹å®¶
 Player *Game::NextPlayer()
 {
 	return player[NextPlayerNum()];
 }
-//µ±Ç°Íæ¼ÒµÄÏÂ¼ÒÔÚÍæ¼ÒÖ¸ÕëÊı×éÖĞµÄÏÂ±ê
+//å½“å‰ç©å®¶çš„ä¸‹å®¶åœ¨ç©å®¶æŒ‡é’ˆæ•°ç»„ä¸­çš„ä¸‹æ ‡
 int Game::NextPlayerNum(void)
 {
 	int i;
@@ -284,60 +284,60 @@ void Game::SendCardForXML(void)
 		landlordcard[i] = cardheap.GetCard();
 }
 
-//½ĞµØÖ÷
+//å«åœ°ä¸»
 void Game::GetLandlord()
 {
 	int i = -1;
-	if (!questioned){//Ëæ»úÈ·¶¨¿ªÊ¼Ñ¯ÎÊµÄÍæ¼Ò
+	if (!questioned){//éšæœºç¡®å®šå¼€å§‹è¯¢é—®çš„ç©å®¶
 		default_random_engine e((UINT)time(nullptr));
 		uniform_int_distribution<unsigned> u(0, 2);
 
 		callbegin = i = u(e);
 		status = GETLANDLORD;
 	}
-	else if (questioned == 3){//ËùÓĞÍæ¼Ò¶¼ÒÑÑ¯ÎÊ¹ı
-		if (lastone){//¸ø³ö·ÖÊı×î¸ßµÄÎªµØÖ÷
+	else if (questioned == 3){//æ‰€æœ‰ç©å®¶éƒ½å·²è¯¢é—®è¿‡
+		if (lastone){//ç»™å‡ºåˆ†æ•°æœ€é«˜çš„ä¸ºåœ°ä¸»
 			curplayer = landlord = lastone;
 			lastone = nullptr;
 		}
-		else{//Èô¾ùÎª½ĞÅÆ£¬ÖØĞÂ¿ªÊ¼ÓÎÏ·
+		else{//è‹¥å‡ä¸ºå«ç‰Œï¼Œé‡æ–°å¼€å§‹æ¸¸æˆ
 			status = NOTSTART;
 		}
 		scene->ShowScene(hMainWnd);
-		if (landlord)//µØÖ÷ÒÑ¾­È·¶¨£¬½øÈë¸øµØÖ÷·¢ÅÆ½×¶Î
+		if (landlord)//åœ°ä¸»å·²ç»ç¡®å®šï¼Œè¿›å…¥ç»™åœ°ä¸»å‘ç‰Œé˜¶æ®µ
 			status = SENDLANDLORDCARD;
 		SetTimer(hMainWnd, 1, 500, NULL);
 		return;
 	}
-	if (i == -1)//²»ÊÇµÚÒ»´ÎÑ¯ÎÊ£¬È·¶¨ÒªÑ¯ÎÊµÄÏÂ¼Ò
+	if (i == -1)//ä¸æ˜¯ç¬¬ä¸€æ¬¡è¯¢é—®ï¼Œç¡®å®šè¦è¯¢é—®çš„ä¸‹å®¶
 		i = NextPlayerNum();
 
-	if (i == 0){//Ñ¯ÎÊµ½ÕæÈËÍæ¼Ò£¬ĞèÒªµÈ´ıÍæ¼Ò×ö³öÑ¡Ôñ
+	if (i == 0){//è¯¢é—®åˆ°çœŸäººç©å®¶ï¼Œéœ€è¦ç­‰å¾…ç©å®¶åšå‡ºé€‰æ‹©
 		scene->ShowQuestionBtn();
 		curplayer = player[0];
 		return;
 	}
-	else{//·ñÔòÖ±½Óµ÷ÓÃÍæ¼ÒµÄAIº¯Êı
+	else{//å¦åˆ™ç›´æ¥è°ƒç”¨ç©å®¶çš„AIå‡½æ•°
 		curplayer = player[i];
 		int result = curplayer->GetBaseScore(questioned, basescore);
 		callscore[i] = result;
-		if (result == 3){//¸ø³öÈı·Ö¾ÍÖ±½Óµ±µØÖ÷
+		if (result == 3){//ç»™å‡ºä¸‰åˆ†å°±ç›´æ¥å½“åœ°ä¸»
 			basescore = result;
 			landlord = curplayer;
 			lastone = nullptr;
 		}
-		else if (result > basescore){//·ñÔò£¬¸ø³ö·ÖÊı´óÓÚÉÏ´Î¸ø·ÖÍæ¼Ò
+		else if (result > basescore){//å¦åˆ™ï¼Œç»™å‡ºåˆ†æ•°å¤§äºä¸Šæ¬¡ç»™åˆ†ç©å®¶
 			basescore = result;
-			lastone = curplayer;//¾Í°Ñ¸ÃÍæ¼Ò¼ÇÂ¼ÏÂÀ´
+			lastone = curplayer;//å°±æŠŠè¯¥ç©å®¶è®°å½•ä¸‹æ¥
 		}
 		++questioned;
 		scene->ShowScene(hMainWnd);;
 	}
-	if (landlord)//µØÖ÷ÒÑÈ·¶¨£¬½øÈë·¢µØÖ÷ÅÆ½×¶Î
+	if (landlord)//åœ°ä¸»å·²ç¡®å®šï¼Œè¿›å…¥å‘åœ°ä¸»ç‰Œé˜¶æ®µ
 		status = SENDLANDLORDCARD;
 	SetTimer(hMainWnd, 1, 500, NULL);
 }
-//ÉèÖÃÕæÈËÍæ¼Ò½ĞµØÖ÷µÄ·ÖÊı
+//è®¾ç½®çœŸäººç©å®¶å«åœ°ä¸»çš„åˆ†æ•°
 void Game::SendScore(int result)
 {
 	callscore[0] = result;
@@ -356,65 +356,102 @@ void Game::SendScore(int result)
 		status = SENDLANDLORDCARD;
 	SetTimer(hMainWnd, 1, 500, NULL);
 }
-//·¢µØÖ÷ÅÆ
+//å‘åœ°ä¸»ç‰Œ
 void Game::SendLandlordCard()
 {
 	for (auto mem : landlordcard)
 		landlord->AddCard(mem);
-	scene->DrawBackground();//²úÉúÁËµØÖ÷£¬½«µØÖ÷ÅÆÕıÃæÏÔÊ¾
+	scene->DrawBackground();//äº§ç”Ÿäº†åœ°ä¸»ï¼Œå°†åœ°ä¸»ç‰Œæ­£é¢æ˜¾ç¤º
 	scene->ShowScene(hMainWnd);;
-	status = DISCARD;//µ±Ç°×´Ì¬Îª³öÅÆ½×¶Î
+	status = DISCARD;//å½“å‰çŠ¶æ€ä¸ºå‡ºç‰Œé˜¶æ®µ
 	SetTimer(hMainWnd, 1, 500, NULL);
 }
-//³öÅÆ
+//å‡ºç‰Œ
 void Game::Discard()
 {
-	if (lastone == curplayer){//¸ÃÍæ¼Ò³öÅÆÃ»ÈËÑ¹ËÀ£¬ĞÂÒ»ÂÖ³öÅÆ
+	if (lastone == curplayer){//è¯¥ç©å®¶å‡ºç‰Œæ²¡äººå‹æ­»ï¼Œæ–°ä¸€è½®å‡ºç‰Œ
 		lastone = nullptr;
-		for (int i = 0; i < 3; ++i){//Çå¿Õ³öÅÆÇø
+		for (int i = 0; i < 3; ++i){//æ¸…ç©ºå‡ºç‰ŒåŒº
 			player[i]->discard.Clear();
 			player[i]->nodiscard = false;
 		}
 
 	}
-	else{//Çå¿Õµ±Ç°³öÅÆÍæ¼Ò³öÅÆÇø
+	else{//æ¸…ç©ºå½“å‰å‡ºç‰Œç©å®¶å‡ºç‰ŒåŒº
 		curplayer->discard.Clear();
 		curplayer->nodiscard = false;
 	}
+	Type last = Unkown;
+	if (lastone)
+	{
+		last = lastone->discard.type;
+	}
+
 	scene->ShowScene(hMainWnd);
 
-	if (curplayer == player[0]){//µ±Ç°Íæ¼ÒÎªÈË
+	if (curplayer == player[0]){//å½“å‰ç©å®¶ä¸ºäºº
 		if (curplayer->selection.count &&
-			curplayer->HumanDiscard()){//Íæ¼ÒÒÑÑ¡ÅÆ²¢ÇÒ·ûºÏ¹æ¶¨
+			curplayer->HumanDiscard()){//ç©å®¶å·²é€‰ç‰Œå¹¶ä¸”ç¬¦åˆè§„å®š
 			scene->HideDiscardBtn();
 			lastone = curplayer;
-			if (curplayer->discard.type == Bomb)//Èç¹û³öÅÆÎªÕ¨µ¯£¬Ôö¼Ó±¶ÂÊ
+			if (curplayer->discard.type == Bomb)//å¦‚æœå‡ºç‰Œä¸ºç‚¸å¼¹ï¼Œå¢åŠ å€ç‡
 				++times;
+			for (int i = 0; i < 3; ++i){//æ¸…é™¤è®°ç‰Œå™¨æ¯ä¸ªç©å®¶çš„ç‰Œ
+				for(std::set<int>::iterator itr = curplayer->discard.cards.begin(); itr != curplayer->discard.cards.end(); ++itr)
+				{
+					player[i]->remainCards.erase(*itr);
+				}
+			}			
+
+
 		}
-		else{//·ñÔò¼ÌĞøµÈ´ıÍæ¼ÒÑ¡ÅÆ
+		else{//å¦åˆ™ç»§ç»­ç­‰å¾…ç©å®¶é€‰ç‰Œ
 			scene->ShowScene(hMainWnd);
 			scene->ShowDiscardBtn();
 			return;
 		}
 
 	}
-	else{//µ±Ç°³öÅÆ·½ÎªµçÄÔ
+	else{//å½“å‰å‡ºç‰Œæ–¹ä¸ºç”µè„‘
 		curplayer->SelectCards();
 		if (curplayer->Discard())
 			lastone = curplayer;
-		if (curplayer->discard.type == Bomb)//Õ¨µ¯
+		if (curplayer->discard.type == Bomb)//ç‚¸å¼¹
 			++times;
+		for (int i = 0; i < 3; ++i){//æ¸…é™¤è®°ç‰Œå™¨æ¯ä¸ªç©å®¶çš„ç‰Œ
+			for(std::set<int>::iterator itr = curplayer->discard.cards.begin(); itr != curplayer->discard.cards.end(); ++itr)
+			{
+				player[i]->remainCards.erase(*itr);
+			}
+		}	
 	}
 	scene->ShowScene(hMainWnd);
 
-	if (lastone->cards.empty())//×îºó³öÅÆ·½ÒÑÎŞÊÖÅÆ
-		status = GAMEOVER;//ÓÎÏ·½áÊø
+
+	if (curplayer && curplayer->nodiscard && last != Unkown && last != Single)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			if (curplayer == player[i])
+			{
+				for (int j = 0; j < 3; ++j)
+				{
+					(player[j]->records[i]).insert(last);
+				}
+				break;
+			}
+		}
+	}
+
+
+	if (lastone->cards.empty())//æœ€åå‡ºç‰Œæ–¹å·²æ— æ‰‹ç‰Œ
+		status = GAMEOVER;//æ¸¸æˆç»“æŸ
 	else
-		curplayer = NextPlayer();//ÏÂ¼Ò¼ÌĞø³öÅÆ
+		curplayer = NextPlayer();//ä¸‹å®¶ç»§ç»­å‡ºç‰Œ
 
 	SetTimer(hMainWnd, 1, 500, NULL);
 }
-//³öÅÆÌáÊ¾
+//å‡ºç‰Œæç¤º
 void Game::Hint()
 {
 	player[0]->selection.Clear();
@@ -423,31 +460,47 @@ void Game::Hint()
 		PostMessage(scene->discand, WM_MYBUTTON, TRUE, 0);
 	InvalidateRect(hMainWnd, NULL, FALSE);
 }
-//¹ıÅÆ
+//è¿‡ç‰Œ
 void Game::Pass()
 {
+	Type last = Unkown;
+	if (lastone)
+	{
+		last = lastone->discard.type;
+	}
+
 	player[0]->Pass();
-	curplayer = NextPlayer();//ÏÂ¼Ò³öÅÆ
+	curplayer = NextPlayer();//ä¸‹å®¶å‡ºç‰Œ
 
 	scene->ShowScene(hMainWnd);
+
+	if (player[0] && player[0]->nodiscard && last != Unkown && last != Single)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+		(player[j]->records[0]).insert(last);
+		}
+	}
+
+
 	SetTimer(hMainWnd, 1, 500, NULL);
 }
 
-//ÓÎÏ·½áÊø
+//æ¸¸æˆç»“æŸ
 void Game::GameOver()
 {
 	int score = basescore * times;
 	bool IsPeopleWin = false;
 
-	curplayer = landlord;//°ÑµØÖ÷ÉèÎªµ±Ç°Íæ¼Ò£¬·½±ã»ñÈ¡ÉÏ¼ÒºÍÏÂ¼Ò
-	if (landlord->cards.size()){//Å©ÃñÊ¤Àû
+	curplayer = landlord;//æŠŠåœ°ä¸»è®¾ä¸ºå½“å‰ç©å®¶ï¼Œæ–¹ä¾¿è·å–ä¸Šå®¶å’Œä¸‹å®¶
+	if (landlord->cards.size()){//å†œæ°‘èƒœåˆ©
 		landlord->score -= score * 2;
 		ProPlayer()->score += score;
 		NextPlayer()->score += score;
 		if (player[0] != landlord)
 			IsPeopleWin = true;
 	}
-	else{//µØÖ÷Ê¤Àû
+	else{//åœ°ä¸»èƒœåˆ©
 		landlord->score += score * 2;
 		ProPlayer()->score -= score;
 		NextPlayer()->score -= score;
@@ -457,8 +510,8 @@ void Game::GameOver()
 
 	scene->ShowScene(hMainWnd);
 	if (IsPeopleWin)
-		MessageBox(hMainWnd, TEXT("¹§Ï²£¬Äú»ñÊ¤ÁË£¡"), TEXT("ÓÎÏ·½áÊø"), 0);
+		MessageBox(hMainWnd, TEXT("æ­å–œï¼Œæ‚¨è·èƒœäº†ï¼"), TEXT("æ¸¸æˆç»“æŸ"), 0);
 	else
-		MessageBox(hMainWnd, TEXT("ºÜÒÅº¶£¬ÄúÊäÁË¡­¡­"), TEXT("ÓÎÏ·½áÊø"), 0);
+		MessageBox(hMainWnd, TEXT("å¾ˆé—æ†¾ï¼Œæ‚¨è¾“"), TEXT("æ¸¸æˆç»“æŸ"), 0);
 	GameStart();
 }

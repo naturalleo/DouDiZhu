@@ -44,6 +44,9 @@ void Player::NewGame()
 	ClearAnalyse();
 	selection.Clear();
 	discard.Clear();
+	for (int i = 0; i < 54; ++i)
+		remainCards.insert(i);//初始化为0-53
+
 }
 //清空分析牌集合
 void Player::ClearAnalyse()

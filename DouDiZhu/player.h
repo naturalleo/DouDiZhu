@@ -36,6 +36,9 @@ public:
 	void FreshenMap(std::map<int, int> &m);//删除分析堆中数量为零的元素
 	static bool MyCompare(CardGroup *c1, CardGroup *c2);//对分析后牌集合排序的回调函数
 
+
+	bool IsDiscardDirplane();
+
 private:
 	Game &game;//游戏对象
 	bool test;//是否试过送下家走
@@ -43,6 +46,13 @@ private:
 	int score;//玩家当前分数
 	std::set<int> cards;//手牌
 	std::vector<CardGroup*> analyse;//分析后拆分的牌型集合
+
+	std::vector<CardGroup*> behaviors;//自己行为记录
+	std::set<Type> records[3]; //其他玩家出牌不要牌型记录(逆时针)
+
+	std::set<int> remainCards; //记牌器
+
+
 	CardGroup selection;//选择牌的集合
 	CardGroup discard;//打出的牌的集合
 };
