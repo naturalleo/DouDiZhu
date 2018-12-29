@@ -225,8 +225,8 @@ void Scene::DrawComputerCards(void)
 
 	}
 	else{//否则，手牌反面显示，并标出剩余手牌数
-		SIZE size;
-		TCHAR szText[5];
+		//SIZE size;
+		//TCHAR szText[5];
 		HFONT hfont = CreateFont(72, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT("Calibri"));
 		HFONT oldfont = (HFONT)SelectObject(hdcScene, hfont);
 		COLORREF color = SetTextColor(hdcScene, RGB(255, 0, 128));

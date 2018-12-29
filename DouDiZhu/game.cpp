@@ -13,6 +13,7 @@ game.cpp
 宋保明	2014.12.5	创建
 \**************************************************************/
 
+
 #include <Windows.h>
 #include <fstream>
 #include <random>
@@ -201,7 +202,7 @@ void Game::GameStartFromXml(void)
 		SetTimer(hMainWnd, 1, 500, NULL);
 	}
 	else
-		assert(false, "牌数不对请确认！");
+		assert(false);
 
 }
 
@@ -546,7 +547,7 @@ void Game::GameOver()
 
 	scene->ShowScene(hMainWnd);
 	if (IsPeopleWin)
-		MessageBox(hMainWnd, TEXT("win！"), TEXT("游戏结束"), 0);
+		MessageBox(hMainWnd, TEXT("win"), TEXT("游戏结束"), 0);
 	else
 		MessageBox(hMainWnd, TEXT("lost"), TEXT("游戏结束"), 0);
 	GameStart();

@@ -35,7 +35,7 @@ Cards::Cards()
 //洗牌
 void Cards::RandCards(void)
 {
-	default_random_engine e(time(nullptr));//随机数引擎
+	default_random_engine e((unsigned int)time(nullptr));//随机数引擎
 	uniform_int_distribution<unsigned> u(0, 53);//整型分布
 
 	for (int i = 0; i < 54; i++){
