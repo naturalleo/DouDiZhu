@@ -35,12 +35,18 @@ public:
 	void SendLandlordCard(void);//发地主牌
 	Player *ProPlayer(void);//当前玩家的上家
 	Player *NextPlayer(void);//当前玩家下家
+
+	Player *ProPlayer(Player *current);//该玩家的上家
+	Player *NextPlayer(Player *current);//该前玩家下家
+	int NextPlayerNum(Player *current);//该前玩家的下家在玩家指针数组中的下标
+
 	int NextPlayerNum(void);//当前玩家的下家在玩家指针数组中的下标
 	bool IsHumanTurn(void);//当前玩家为player[0]
 	void Discard(void);//出牌
 	void Hint(void);//提示
 	void Pass(void);//过牌
 	void GameOver(void);//游戏结束
+
 
 
 	void SplitString(const std::string& s, std::vector<std::string>& v, const std::string& c);

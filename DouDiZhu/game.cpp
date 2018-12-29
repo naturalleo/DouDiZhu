@@ -245,12 +245,39 @@ Player *Game::NextPlayer()
 {
 	return player[NextPlayerNum()];
 }
+
 //当前玩家的下家在玩家指针数组中的下标
 int Game::NextPlayerNum(void)
 {
 	int i;
-	for (i = 0; i < 3; ++i){
+	for (i = 0; i < 3; ++i) {
 		if (player[i] == curplayer)
+			break;
+	}
+	return (i + 1) % 3;
+}
+
+//获取当前玩家的上家
+Player *Game::ProPlayer(Player *current)
+{
+	int i;
+	for (i = 0; i < 3; ++i) {
+		if (player[i] == current)
+			break;
+	}
+	return player[(i + 2) % 3];
+}
+//获取当前玩家的下家
+Player *Game::NextPlayer(Player *current)
+{
+	return player[NextPlayerNum(current)];
+}
+//当前玩家的下家在玩家指针数组中的下标
+int Game::NextPlayerNum(Player *current)
+{
+	int i;
+	for (i = 0; i < 3; ++i) {
+		if (player[i] == current)
 			break;
 	}
 	return (i + 1) % 3;
